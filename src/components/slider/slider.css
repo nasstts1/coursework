@@ -1,0 +1,182 @@
+/* Загальний контейнер для слайдера */
+.content-slider-wrapper {
+  max-width: 1000px; 
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+/* Контейнер для кожного слайда */
+.swiper-slide .slide-content {
+  display: flex; 
+  flex-direction: row; 
+  align-items: center; 
+  background-color: #fff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden; 
+  min-height: 400px; 
+}
+
+/* Контейнер для зображення */
+.slide-image-container {
+  flex: 1;
+  min-width: 50%;
+  max-height: 450px; 
+  overflow: hidden; 
+}
+
+.slide-image-container img {
+  width: 100%;
+  height: 100%; 
+  object-fit: cover; 
+  display: block;
+}
+
+/* Контейнер для текстового вмісту */
+.slide-text-content {
+  flex: 1; 
+  padding: 70px; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+}
+
+.slide-text-content h2 {
+  font-size: 42px;
+  margin-bottom: 15px;
+  color: #333;
+  font-weight: 600;
+}
+
+.slide-text-content p {
+  font-size: 1.1em;
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.slide-text-content .slide-date {
+  font-size: 0.9em;
+  color: #888;
+  text-align: left; 
+}
+
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: #007aff !important; 
+  background-color: rgba(255, 255, 255, 0.7); 
+  border-radius: 50%;
+  padding: 30px;
+  width: 40px; 
+  height: 40px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem !important; 
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 1.5rem !important; 
+}
+
+/* Стилі для пагінації (точок) */
+.swiper-pagination-bullet {
+  background-color: #ccc !important;
+  opacity: 0.8;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #007aff !important;
+  opacity: 1;
+}
+
+@media (max-width: 930px) {
+  .content-slider-wrapper {
+    margin: 20px auto; /* Меньше отступов сверху/снизу */
+    padding: 0 10px; /* Меньше отступов по бокам */
+  }
+
+  .swiper-slide .slide-content {
+    flex-direction: column; /* Элементы будут располагаться по вертикали */
+    min-height: auto; /* Убираем фиксированную минимальную высоту, чтобы контент определял высоту */
+    height: 450px; /* Зададим фиксированную высоту для мобильных, чтобы картинка была видна */
+    justify-content: flex-end; /* Чтобы текст прижимался к низу слайда */
+    background-color: transparent; /* Убираем фон, так как изображение будет фоном */
+    box-shadow: none; /* Убираем тень, чтобы не мешала изображению */
+  }
+
+  .slide-image-container {
+    position: absolute; /* Позиционируем изображение абсолютно */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Размещаем изображение под текстом */
+    min-width: unset; /* Убираем min-width, так как абсолютное позиционирование */
+    max-height: unset; /* Убираем max-height */
+  }
+
+  .slide-image-container img {
+    /* Эти стили уже правильные для обложки, но повторим для ясности */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .slide-text-content {
+    position: relative; /* Позиционируем текст относительно .slide-content */
+    z-index: 2; /* Размещаем текст поверх изображения */
+    padding: 30px 20px; /* Меньше отступов */
+    text-align: center; /* Центрируем текст */
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(0, 0, 0, 0) 100%
+    ); /* Градиент для лучшей читаемости текста на изображении */
+    color: #fff; /* Делаем текст белым */
+    flex: unset; /* Убираем flex: 1, так как он больше не нужен */
+    justify-content: flex-end; /* Прижимаем текст к низу, если .slide-content имеет height */
+    height: 100%; /* Текстовый контейнер занимает всю высоту .slide-content */
+  }
+
+  .slide-text-content h2 {
+    font-size: 28px; /* Уменьшаем размер заголовка */
+    margin-bottom: 10px;
+    color: #fff; /* Делаем заголовок белым */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Добавляем тень для лучшей читаемости */
+  }
+
+  .slide-text-content p {
+    font-size: 1em; /* Уменьшаем размер параграфа */
+    margin-bottom: 15px;
+    color: #eee; /* Более светлый белый для параграфа */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+  }
+
+  .slide-text-content .slide-date {
+    font-size: 0.85em; /* Уменьшаем размер даты */
+    color: #ccc; /* Более светлый белый для даты */
+    text-align: center; /* Центрируем дату */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+  }
+
+  /* Для стрелок навигации Swiper */
+  .swiper-button-prev,
+  .swiper-button-next {
+    top: 50%; /* Центрируем по вертикали */
+    transform: translateY(-50%);
+    padding: 20px; /* Уменьшаем паддинг */
+    width: 30px; /* Уменьшаем размер */
+    height: 30px;
+    font-size: 1.2rem !important; /* Уменьшаем размер иконок */
+  }
+
+  .swiper-button-prev {
+    left: 5px; /* Ближе к краю */
+  }
+
+  .swiper-button-next {
+    right: 5px; /* Ближе к краю */
+  }
+}
